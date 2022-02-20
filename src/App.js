@@ -2,6 +2,11 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import {Meme} from './components/Meme'
 
+
+const objectToQueryParam = (obj) => {
+  Object.entries(obj).map(([key,value]) => `${key}=${value}`)
+  return '?'
+}
 function App() {
   const [templates, setTemplates] = useState([]);
   const [template,setTemplate] = useState(null);
@@ -17,9 +22,17 @@ function App() {
   return (
     <div className="App" style={{textAlign: 'center'}}>
       {template && (
-        <form onSubmit={e => { 
+        <form onSubmit={async e => { 
           e.preventDefault()
           //add logic to create meme from api
+          const params = {
+            template_id: template.id,
+            text0:topText,
+            text1:bottomText,
+            username: 'tenthinten',
+            password: 'Goodtime@11',     
+          }
+          const response = await fetch('https://api.imgflip.com/caption_image')
         }}>
           <Meme template={template}/>
           <input 
