@@ -14,18 +14,29 @@ function App() {
 
   return (
     <div className="App" style={{textAlign: 'center'}}>
-      {template && <Meme template={template} />}
-      {!template && 
-        templates.map(template => {
-          return(
-            <Meme 
-              template ={template}
-              onClick={() => {
-                setTemplate(template)
-              }}
-            />
-          )
-        })}
+      {template && (
+        <>
+          <Meme template={template}/>
+          <input placeholder="top text"/>
+          <input placeholder="bottom text"/>
+        </>
+      )}
+      {!template &&
+      (
+        <>
+        <h1>Pick a template</h1>
+          {templates.map(template => {
+            return(
+              <Meme 
+                template ={template}
+                onClick={() => {
+                  setTemplate(template)
+                }}
+              />
+            )
+          })}
+        </>
+      )}
     </div>
   );
 }
