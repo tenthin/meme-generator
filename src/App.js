@@ -4,8 +4,8 @@ import {Meme} from './components/Meme'
 
 
 const objectToQueryParam = (obj) => {
-  Object.entries(obj).map(([key,value]) => `${key}=${value}`)
-  return '?'
+  const params = Object.entries(obj).map(([key,value]) => `${key}=${value}`)
+  return '?' + params.join('&')
 }
 function App() {
   const [templates, setTemplates] = useState([]);
@@ -29,10 +29,16 @@ function App() {
             template_id: template.id,
             text0:topText,
             text1:bottomText,
-            username: 'tenthinten',
-            password: 'Goodtime@11',     
+            username: 'zxcvbnmzxcvbnm',
+            password: 'zxcvbnm12345678',     
           }
-          const response = await fetch('https://api.imgflip.com/caption_image')
+          const response = await fetch(
+            `https://api.imgflip.com/caption_image${objectToQueryParam(
+              params
+            )}`
+          );
+          const data = await response.json()
+          console.log(data)
         }}>
           <Meme template={template}/>
           <input 
