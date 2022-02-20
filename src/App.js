@@ -4,7 +4,9 @@ import {Meme} from './components/Meme'
 
 function App() {
   const [templates, setTemplates] = useState([]);
-  const [template,setTemplate] = useState(null)
+  const [template,setTemplate] = useState(null);
+  const [topText,setTopText] = useState('');
+  const [bottomText,setBottomText] = useState('');
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes').then(x => 
@@ -17,10 +19,19 @@ function App() {
       {template && (
         <form onSubmit={e => { 
           e.preventDefault()
+          //add logic to create meme from api
         }}>
           <Meme template={template}/>
-          <input placeholder="top text"/>
-          <input placeholder="bottom text"/>
+          <input 
+            placeholder="top text" 
+            value={topText} 
+            onChange={e => setTopText(e.target.value)}
+          />
+          <input 
+            placeholder="bottom text"
+            value={bottomText} 
+            onChange={e => setBottomText(e.target.value)}
+          />
           <button type="submit">create meme</button>
           </form>
       )}
