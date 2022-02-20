@@ -5,12 +5,18 @@ function App() {
   const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.imgflip.com/get_memes').then(x => x.json().then(response => response.data.memes))
+    fetch('https://api.imgflip.com/get_memes').then(x => 
+      x.json().then(response => setTemplates(response.data.memes)
+    ))
   },[])
 
   return (
-    <div className="App">
-      meme-generator
+    <div className="App" style={{textAlign: 'center'}}>
+      {templates.map(template => {
+        return(
+          <img key={template.id} src={template.url} alt={template.name} />
+        )
+      })}
     </div>
   );
 }
