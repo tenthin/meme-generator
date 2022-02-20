@@ -15,11 +15,14 @@ function App() {
   return (
     <div className="App" style={{textAlign: 'center'}}>
       {template && (
-        <>
+        <form onSubmit={e => { 
+          e.preventDefault()
+        }}>
           <Meme template={template}/>
           <input placeholder="top text"/>
           <input placeholder="bottom text"/>
-        </>
+          <button type="submit">create meme</button>
+          </form>
       )}
       {!template &&
       (
